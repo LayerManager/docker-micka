@@ -1,13 +1,14 @@
-build-and-push:
+build-custom-and-push:
 	mkdir -p micka-custom
 	rm -rf micka-custom/*
-	cp -r ../micka-custom/* micka-custom
-	export MICKA_CUSTOM_VERSION=$(git -C ../micka-custom rev-parse --short HEAD)
-	docker build -t "jirikcz/micka:micka-custom-${MICKA_CUSTOM_VERSION}" .
+	cp -r ../micka-fork/* micka-custom
+	export MICKA_CUSTOM_VERSION=$(git -C ../micka-fork rev-parse --short HEAD)
+	docker build -f Dockerfile.custom -t "jirikcz/micka:micka-custom-${MICKA_CUSTOM_VERSION}" .
 	docker push "jirikcz/micka:micka-custom-${MICKA_CUSTOM_VERSION}"
 
-build-latest:
+build-custom-latest:
 	mkdir -p micka-custom
 	rm -rf micka-custom/*
-	cp -r ../micka-custom/* micka-custom
-	docker build -t "jirikcz/micka:micka-custom-latest" .
+	cp -r ../micka-fork/* micka-custom
+	docker build -f Dockerfile.custom -t "jirikcz/micka:micka-custom-latest" .
+

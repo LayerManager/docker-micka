@@ -22,12 +22,15 @@ RUN curl -o /tmp/composer-setup.php https://getcomposer.org/installer \
     && php7.3 /tmp/composer-setup.php --no-ansi --install-dir=/usr/local/bin --filename=composer --snapshot \
     && rm -f /tmp/composer-setup.*
 
-RUN cd /var/www/html/ \
-    && git clone https://github.com/jirik/micka-fork.git Micka \
-    && cd Micka \
-    && git checkout 14e52e518a6e3b743172dac0fa033f22927c392e \
+COPY micka-custom/php/composer.json /var/www/html/Micka/php/composer.json
+RUN cd /var/www/html/Micka \
     && cd php \
-    && php7.3 /usr/local/bin/composer install \
+    && php7.3 /usr/local/bin/composer install
+
+COPY micka-custom /var/www/html/Micka
+
+RUN cd /var/www/html/Micka \
+    && cd php \
     && mkdir -p temp log \
     && chmod -Rfv a+rwx  log/ temp/ \
     && cp /var/www/html/Micka/php/app/config/codelists.xml.dist /var/www/html/Micka/php/app/config/codelists.xml \
