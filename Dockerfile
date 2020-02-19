@@ -23,9 +23,9 @@ RUN curl -o /tmp/composer-setup.php https://getcomposer.org/installer \
     && rm -f /tmp/composer-setup.*
 
 RUN cd /var/www/html/ \
-    && git clone https://github.com/jirik/micka-fork.git Micka \
+    && git clone https://github.com/hsrs-cz/Micka.git \
     && cd Micka \
-    && git checkout 14e52e518a6e3b743172dac0fa033f22927c392e \
+    && git checkout 4ded0ae7b932887cd1fba3c831b18627c5ebc2ad \
     && cd php \
     && php7.3 /usr/local/bin/composer install \
     && mkdir -p temp log \
