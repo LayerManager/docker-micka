@@ -22,10 +22,13 @@ RUN curl -o /tmp/composer-setup.php https://getcomposer.org/installer \
     && php7.3 /tmp/composer-setup.php --no-ansi --install-dir=/usr/local/bin --filename=composer --snapshot \
     && rm -f /tmp/composer-setup.*
 
+ARG MICKA_VERSION=v2020.010
+RUN test -n "$MICKA_VERSION"
+
 RUN cd /var/www/html/ \
     && git clone https://github.com/hsrs-cz/Micka.git \
     && cd Micka \
-    && git checkout 4ded0ae7b932887cd1fba3c831b18627c5ebc2ad \
+    && git checkout ${MICKA_VERSION} \
     && cd php \
     && php7.3 /usr/local/bin/composer install \
     && mkdir -p temp log \
