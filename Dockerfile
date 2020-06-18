@@ -22,7 +22,7 @@ RUN curl -o /tmp/composer-setup.php https://getcomposer.org/installer \
     && php7.3 /tmp/composer-setup.php --no-ansi --install-dir=/usr/local/bin --filename=composer --snapshot \
     && rm -f /tmp/composer-setup.*
 
-ARG MICKA_VERSION=v2020.013
+ARG MICKA_VERSION=v2020.014
 RUN test -n "$MICKA_VERSION"
 
 RUN cd /var/www/html/ \
